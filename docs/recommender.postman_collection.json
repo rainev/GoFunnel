@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "Pluggable Recommender API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Sample Payload",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/recommend/sample",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "recommend", "sample"]
+        }
+      }
+    },
+    {
+      "name": "Recommend",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"questions\": [\n    {\n      \"id\": \"budget\",\n      \"label\": \"What is your budget?\",\n      \"type\": \"single\",\n      \"options\": [\"Low\", \"Mid\", \"High\"],\n      \"required\": true\n    },\n    {\n      \"id\": \"use_case\",\n      \"label\": \"What are you using this for?\",\n      \"type\": \"multi\",\n      \"options\": [\"Work\", \"Travel\", \"Gaming\"],\n      \"required\": true\n    }\n  ],\n  \"answers\": {\n    \"budget\": \"Mid\",\n    \"use_case\": [\"Work\", \"Travel\"]\n  },\n  \"sources\": [\n    {\n      \"id\": \"source_openai\",\n      \"name\": \"OpenAI Recommender\",\n      \"provider\": \"openai\",\n      \"endpoint\": \"https://api.openai.com/v1/responses\",\n      \"model\": \"gpt-4.1-mini\",\n      \"weight\": 1,\n      \"enabled\": true,\n      \"promptTemplate\": \"Return top 5 recommendation IDs with confidence scores\",\n      \"recommendationUniverse\": \"product_a\\nproduct_b\\nproduct_c\"\n    }\n  ],\n  \"wordBank\": [\n    { \"id\": \"word_value\", \"word\": \"value\", \"enabled\": true },\n    { \"id\": \"word_fast\", \"word\": \"fast setup\", \"enabled\": true }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/recommend",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "recommend"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}
