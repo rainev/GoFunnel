@@ -19,7 +19,7 @@ export async function POST(request) {
 
     const { normalizedQuestions } = buildQuestionnaire(Array.isArray(questions) ? questions : []);
 
-    const recommendations = await runRecommenders({
+    const { recommendations, issues } = await runRecommenders({
       sources: Array.isArray(sources) ? sources : [],
       answers: answers || {},
       normalizedQuestions,
@@ -29,7 +29,7 @@ export async function POST(request) {
     return withCors(
       NextResponse.json({
         recommendations,
-        issues: [],
+        issues,
         metadata: {
           questionCount: normalizedQuestions.length,
           sourceCount: Array.isArray(sources) ? sources.length : 0,
