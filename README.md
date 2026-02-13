@@ -69,6 +69,11 @@ curl -X POST http://localhost:3000/api/v1/recommend \
 </script>
 ```
 
+## Important: 
+```
+Include OPENAI_API_KEY inside .env to run locally
+```
+
 ## Run locally
 
 ```bash
